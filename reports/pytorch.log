@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/shreyasprasad/miniforge3/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def polynomial(x):
+    return x**4 - 2 * x**3 + 3 * x**2 - 4 * x + 5
+
+# MODIFY THE CODE BELOW TO DEFINE p1, p2, p3, p4 and d2y_x, d3y_x, and d4y_x
+
+def p1(x):
+    # TODO: fix me to be the derivative of polynomial(x)
+    return 4 * x**3 - 6 * x**2 + 6 * x - 4
+
+def p2(x):
+    # TODO: fix me to be the derivative of p1(x)
+    return 12 * x**2 - 12 * x + 6
+
+def p3(x):
+    # TODO: fix me to be the derivative of p2(x)
+    return 24 * x - 12
+def p4(x):
+    # TODO: fix me to be the derivative of p3(x)
+    return 24
+
+ # TODO: fix me by adding requires_grad
+x = torch.linspace(-2.0, 3.0, 100, requires_grad=True)
+y = polynomial(x, requires_grad=True)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Input [0;32mIn [11][0m, in [0;36m<cell line: 23>[0;34m()[0m
+[1;32m     21[0m  [38;5;66;03m# TODO: fix me by adding requires_grad[39;00m
+[1;32m     22[0m x [38;5;241m=[39m torch[38;5;241m.[39mlinspace([38;5;241m-[39m[38;5;241m2.0[39m, [38;5;241m3.0[39m, [38;5;241m100[39m, requires_grad[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[0;32m---> 23[0m y [38;5;241m=[39m [43mpolynomial[49m[43m([49m[43mx[49m[43m,[49m[43m [49m[43mrequires_grad[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
+
+[0;31mTypeError[0m: polynomial() got an unexpected keyword argument 'requires_grad'
+TypeError: polynomial() got an unexpected keyword argument 'requires_grad'
+

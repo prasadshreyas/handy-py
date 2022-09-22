@@ -343,6 +343,11 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counter">
+   Counter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#random">
    Random
   </a>
@@ -377,6 +382,11 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counter">
+   Counter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#random">
    Random
   </a>
@@ -406,7 +416,9 @@ title="Print to PDF"
 <p>Let’s say if you want to initialize a list of size <span class="math notranslate nohighlight">\(n\)</span> with zeros, you can use this trick:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">list_zero</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">list_zero</span>
 </pre></div>
 </div>
 </div>
@@ -416,36 +428,57 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>You can also use this to initialize a matrix of size <span class="math notranslate nohighlight">\(n \times m\)</span> with zeros</p>
+<p>But, you <strong>cannot</strong> use this to initialize a matrix of size <span class="math notranslate nohighlight">\(n \times m\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_zero</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">matrix_zero</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0],
+ [0, 0, 0, 0, 0]]
 </pre></div>
 </div>
 </div>
 </div>
-<p>But when try to initialize a matrix of size <span class="math notranslate nohighlight">\(n \times m\)</span> with random numbers, you can’t do this:</p>
+<p>This is because the random numbers are not generated for each element of the list but rather the same random number is <strong>copied</strong> <span class="math notranslate nohighlight">\(n\)</span> times. See the following example:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a random array of size 5 with values between 0 and 10</span>
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">5</span>
-<span class="n">a</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_zero</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">matrix_zero</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[9, 9, 9, 9, 9]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 0, 0, 0, 0],
+ [1, 0, 0, 0, 0],
+ [1, 0, 0, 0, 0],
+ [1, 0, 0, 0, 0],
+ [1, 0, 0, 0, 0]]
 </pre></div>
 </div>
 </div>
 </div>
-<p>This is because the random numbers are not generated for each element of the list but rather the same random number is <strong>copied</strong> <span class="math notranslate nohighlight">\(n\)</span> times. To fix this, you can use list comprehension.</p>
+<p>But in a list, this is not the case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_zero</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">list_zero</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 0, 0, 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The safest way to initialize a list or a matrix is to use a list comprehension:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
@@ -453,7 +486,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[9, 8, 8, 6, 8]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[9, 6, 3, 2, 0]
 </pre></div>
 </div>
 </div>
@@ -467,11 +500,122 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[7, 5, 2], [5, 10, 5], [10, 5, 1]]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[10, 0, 5], [0, 7, 0], [9, 6, 0]]
 </pre></div>
 </div>
 </div>
 </div>
+<hr class="docutils" />
+<section id="counter">
+<h2>Counter<a class="headerlink" href="#counter" title="Permalink to this headline">#</a></h2>
+<p>Counter is used to count the number of occurrences of each element in a list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;abbbababbbacacacc&#39;</span><span class="p">)</span>
+<span class="n">freq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;a&#39;: 6, &#39;b&#39;: 7, &#39;c&#39;: 4})
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although it can be handy as a frequency dict, it is the most useful when you want the k-most frequent elements in a list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">freq</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;b&#39;, 7), (&#39;a&#39;, 6)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>It can also be used to operate on two lists at the same time.</p>
+<ul class="simple">
+<li><p>Addition</p></li>
+<li><p>Subtraction</p></li>
+<li><p>Intersection</p></li>
+<li><p>Union</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;abbbababbbacacacc&#39;</span><span class="p">)</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s1">&#39;abbbababbbacazzzz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;a&#39;: 11, &#39;b&#39;: 14, &#39;c&#39;: 5, &#39;z&#39;: 4})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">&amp;</span> <span class="n">c2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;a&#39;: 5, &#39;b&#39;: 7, &#39;c&#39;: 1})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;a&#39;: 1, &#39;c&#39;: 3})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span> <span class="o">-</span> <span class="n">c1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;z&#39;: 4})
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">|</span> <span class="n">c2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;a&#39;: 6, &#39;b&#39;: 7, &#39;c&#39;: 4, &#39;z&#39;: 4})
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
 <p>Analyzing the time complexity of an algorithm and comparing it with other algorithms is a very important part of the preparing for interview process. In Python, there are a few ways to measure the time of a function. The most common way is to use the <code class="docutils literal notranslate"><span class="pre">time</span></code> module.</p>
 <p>To measure the time of a function, <code class="docutils literal notranslate"><span class="pre">%timeit</span></code> is a very useful tool. It will run the function multiple times and give you the average time it took to run the function.</p>
 <div class="cell docutils container">
@@ -485,7 +629,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.01 ms ± 32.2 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.02 ms ± 87.3 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
 </pre></div>
 </div>
 </div>
@@ -505,6 +649,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="random">
 <h2>Random<a class="headerlink" href="#random" title="Permalink to this headline">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">random</span></code> module has a lot of useful functions. Here are a few that I’ve found useful.</p>
@@ -523,7 +668,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5, 4, 3, 2, 1]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 4, 3, 5, 1]
 </pre></div>
 </div>
 </div>
@@ -541,7 +686,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime.datetime(2022, 9, 20, 1, 7, 26, 564268)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>datetime.datetime(2022, 9, 21, 23, 38, 1, 836564)
 </pre></div>
 </div>
 </div>
@@ -554,7 +699,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2022-09-20 01:07:26&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2022-09-21 23:38:01&#39;
 </pre></div>
 </div>
 </div>
