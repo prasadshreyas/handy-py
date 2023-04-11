@@ -42,7 +42,7 @@ In Jupyter notebooks, using `exit()` or `quit()` is not recommended, as it raise
 
 Use the `raise` keyword followed by an exception type to raise an exception. This can be helpful for debugging purposes or to stop the execution of a specific cell in a Jupyter notebook.
 
-```markdown
+```python
 # Example:
 
 print("This line will be executed.")
@@ -54,7 +54,7 @@ print("This line will not be executed.")
 
 The `SystemExit` exception can be used to stop the execution of the current cell in a Jupyter notebook. When `SystemExit` is encountered, the notebook will stop executing the current cell and move on to the next one.
 
-```markdown
+```python
 # Example:
 
 print("This line will be executed.")
