@@ -32,3 +32,32 @@ logging.basicConfig(filename='example.log', level=logging.DEBUG)
 ```
 
 This will log messages to a file named `example.log` instead of displaying them in the console.
+
+
+---
+
+In Jupyter notebooks, using `exit()` or `quit()` is not recommended, as it raises a `SystemExit` exception and may cause unintended behavior. Instead, you can use `raise` and `SystemExit` to control the flow of your code execution.
+
+**`raise` Exception:**
+
+Use the `raise` keyword followed by an exception type to raise an exception. This can be helpful for debugging purposes or to stop the execution of a specific cell in a Jupyter notebook.
+
+```markdown
+# Example:
+
+print("This line will be executed.")
+raise Exception("An error occurred!")
+print("This line will not be executed.")
+```
+
+**`SystemExit`:**
+
+The `SystemExit` exception can be used to stop the execution of the current cell in a Jupyter notebook. When `SystemExit` is encountered, the notebook will stop executing the current cell and move on to the next one.
+
+```markdown
+# Example:
+
+print("This line will be executed.")
+raise SystemExit
+print("This line will not be executed.")
+```
